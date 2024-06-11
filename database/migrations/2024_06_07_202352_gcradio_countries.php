@@ -6,16 +6,14 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
+ /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('gcradio_generos_musicales', function (Blueprint $table) {
+        Schema::create('gcradio_countries', function (Blueprint $table) {
             $table->id('id');
-            $table->string('titulo');
-            $table->string('url_imagen');
-            $table->string('url_playlist');
+            $table->string('name');
         });
     }
 
@@ -24,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('gcradio_generos_musicales');
+        Schema::dropIfExists('gcradio_countries');
     }
 };

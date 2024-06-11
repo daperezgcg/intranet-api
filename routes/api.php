@@ -1,9 +1,13 @@
 <?php
 
+use App\Http\Controllers\Api\GcRadioAdsController;
+use App\Http\Controllers\Api\GcRadioCountriesController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\GcRadioUsuariosController;
 use App\Http\Controllers\Api\GcRadioGenerosMusicalesController;
+use App\Http\Controllers\Api\GcRadioMusicalGenresController;
+use App\Http\Controllers\Api\GcRadioUsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,14 +21,23 @@ use App\Http\Controllers\Api\GcRadioGenerosMusicalesController;
 */
 
 Route::prefix('gcradio')->group(function () {
-    Route::controller(GcRadioUsuariosController::class)->group(function () {
-        Route::get('obtenerUsuario/{uuid}', 'obtenerUsuario');
-        // Route::get('ontenerPreferencias/{uuid}', 'ontenerPreferencias');
-        Route::post('registrarUsuario', 'registrarUsuario');
+    Route::controller(GcRadioUsersController::class)->group(function () {
+        Route::get('getUser/{uuid}', 'getUser');
+        Route::post('registerUser', 'registerUser');
+        Route::put('updateUser', 'updateUser');
     });
 
-    Route::controller(GcRadioGenerosMusicalesController::class)->group(function () {
-        Route::get('obtenerGenerosMusicales', 'obtenerGenerosMusicales');
-        Route::post('registrarGeneroMusical', 'registrarGeneroMusical');
+    Route::controller(GcRadioMusicalGenresController::class)->group(function () {
+        Route::get('getMusicalGenres', 'getMusicalGenres');
+        Route::post('registerMusicalGenre', 'registerMusicalGenre');
+    });
+
+    Route::controller(GcRadioCountriesController::class)->group(function () {
+        Route::get('getCountries', 'getCountries');
+    });
+
+    Route::controller(GcRadioAdsController::class)->group(function () {
+        Route::get('getAds/{idCountry}', 'getAds');
+        Route::post('registerAd', 'registerAd');
     });
 });

@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('gcradio_usuarios', function (Blueprint $table) {
-            $table->uuid('uuid')->primary();
-            $table->string('nombre');
-            $table->string('correo');
-            $table->string('pais');
+        Schema::create('gcradio_musical_genres', function (Blueprint $table) {
+            $table->id('id');
+            $table->string('name');
+            $table->string('url_image');
+            $table->string('url_playlist');
         });
     }
 
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('gcradio_usuarios');
+        Schema::dropIfExists('gcradio_musical_genres');
     }
 };

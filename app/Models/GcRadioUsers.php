@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Models;
-use Ramsey\Uuid\Uuid;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\GcRadioGenerosMusicales;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Ramsey\Uuid\Uuid;
 
-class GcRadioUsuarios extends Model
+class GcRadioUsers extends Model
 {
     use HasFactory;
 
@@ -18,16 +18,16 @@ class GcRadioUsuarios extends Model
 
     protected $primaryKey = 'uuid';
 
-    protected $table = 'gcradio_usuarios';
+    protected $table = 'gcradio_users';
     protected $connection = 'mysql';
 
     public $timestamps = false;
     protected $updateTimestamps = false;
 
     protected $fillable = [
-        'nombre',
-        'correo',
-        'pais'
+        'name',
+        'email',
+        'id_country'
     ];
 
     /**
@@ -38,13 +38,15 @@ class GcRadioUsuarios extends Model
         parent::boot();
         static::creating(function ($model) {
             $model->{$model->getKeyName()} = Uuid::uuid4()->toString();
-            // $model->created_at = now();
-            // $model->updated_at = now();
         });
     }
 
-    public function preferenciasMusicales(): BelongsToMany
+    public function musicalPreferences(): BelongsToMany
     {
-        return $this->belongsToMany(GcRadioGenerosMusicales::class, 'gcradio_preferencias_musicales', 'uuid_usuario', 'id_genero_musical', 'uuid');
+        return $this->belongsToMany(GcRadioMusicalGenres::class, 'gcradio_musical_preferences', 'uuid_user', 'id_musical_genre', 'uuid');
+    }
+
+    public function countries(): BelongsTo {
+            return $this->belongsTo(GcRadioCountries::class, 'id_country', 'id');
     }
 }
