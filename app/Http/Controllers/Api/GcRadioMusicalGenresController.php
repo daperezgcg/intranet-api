@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 
 class GcRadioMusicalGenresController extends Controller
 {
+    /**
+     * Obtiene todos los generos musicales.
+     */
     public function getMusicalGenres(Request $request)
     {
         $musicalGenre = GcRadioMusicalGenres::select('*')->get();
@@ -16,6 +19,9 @@ class GcRadioMusicalGenresController extends Controller
         return response()->json($musicalGenre, 200);
     }
 
+    /**
+     * Registra un genero musical.
+     */
     public function registerMusicalGenre(Request $request)
     {
         $validatedData = $request->validate([

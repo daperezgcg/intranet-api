@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class GcRadioAdsController extends Controller
 {
+
+    /**
+     * Obtiene todos los anunciós relacionados al id del país.
+     */
     public function getAds($idCountry, Request $request)
     {
         $ads = GcRadioAds::with('adsCountries')
@@ -23,6 +27,9 @@ class GcRadioAdsController extends Controller
         return response()->json('Anuncios no encontrados', 400);
     }
 
+    /**
+     * Registra un anuncio y le asigna uno o mas paises.
+     */
     public function registerAd(Request $request)
     {
         $validatedData = $request->validate([

@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 
 class GcRadioUsersController extends Controller
 {
+    /**
+     * Obtiene el usuario y sus preferencias musicales.
+     */
     public function getUser($uuid, Request $request)
     {
         $user = GcRadioUsers::select('*')->where('uuid', $uuid)->first();
@@ -21,6 +24,9 @@ class GcRadioUsersController extends Controller
         return response()->json('Usuario no encontrado', 400);
     }
 
+    /**
+     * Registra un nuevo usuario y le asigna los generos musicales que seleccionó.
+     */
     public function registerUser(Request $request)
     {
         $validatedData = $request->validate([
@@ -45,7 +51,9 @@ class GcRadioUsersController extends Controller
         return response()->json('No se pudo registrar el usuario', 400);
     }
 
-
+    /**
+     * Actualiza la información del usuario así como sus prefencias musicales.
+     */
     public function updateUser(Request $request)
     {
         $validatedData = $request->validate([

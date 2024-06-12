@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 
 class GcRadioCountriesController extends Controller
 {
+    /**
+     * Obtiene todos los paises.
+     */
     public function getCountries(Request $request)
     {
         $countries = GcRadioCountries::select('*')->get();
