@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\GcRadio;
 
 use App\Http\Controllers\Controller;
-use App\Models\GcRadioCountries;
+use App\Models\GcRadio\GcRadioCountries;
 use Illuminate\Http\Request;
 
 class GcRadioCountriesController extends Controller

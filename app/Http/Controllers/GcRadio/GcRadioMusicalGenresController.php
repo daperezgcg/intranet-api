@@ -1,22 +1,28 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\GcRadio;
 
 use App\Http\Controllers\Controller;
-use App\Models\GcRadioMusicalGenres;
+use App\Models\GcRadio\GcRadioMusicalGenres;
 use App\Utilities\SharedFunctions;
 use Illuminate\Http\Request;
 
 class GcRadioMusicalGenresController extends Controller
 {
     /**
-     * Obtiene todos los generos musicales.
+     * Obtiene todos los generos musicales junto a sus canciones.
      */
     public function getMusicalGenres(Request $request)
     {
-        $musicalGenre = GcRadioMusicalGenres::select('*')->get();
+        $musicalGenres = GcRadioMusicalGenres::select('*')
+        ->with('genreSongs')
+        ->get();
 
-        return response()->json($musicalGenre, 200);
+        if ($musicalGenres) {
+            return response()->json($musicalGenres, 200);
+        }
+
+        return response()->json('generos no encontrados', 400);
     }
 
     /**

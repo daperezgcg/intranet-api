@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\GcRadio;
 
 use App\Http\Controllers\Controller;
-use App\Models\GcRadioUsers;
+use App\Models\GcRadio\GcRadioUsers;
 use Illuminate\Http\Request;
 
 class GcRadioUsersController extends Controller
@@ -13,11 +13,9 @@ class GcRadioUsersController extends Controller
      */
     public function getUser($uuid, Request $request)
     {
-        $user = GcRadioUsers::select('*')->where('uuid', $uuid)->first();
+        $user = GcRadioUsers::select('*')->with('musicalPreferences')->where('uuid', $uuid)->first();
 
         if ($user) {
-            $user->preferences = $user->musicalPreferences()->pluck('id');
-
             return response()->json($user, 200);
         }
 

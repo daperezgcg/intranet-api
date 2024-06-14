@@ -1,13 +1,11 @@
 <?php
 
-use App\Http\Controllers\Api\GcRadioAdsController;
-use App\Http\Controllers\Api\GcRadioCountriesController;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Api\GcRadioUsuariosController;
-use App\Http\Controllers\Api\GcRadioGenerosMusicalesController;
-use App\Http\Controllers\Api\GcRadioMusicalGenresController;
-use App\Http\Controllers\Api\GcRadioUsersController;
+use App\Http\Controllers\GcRadio\GcRadioAdsController;
+use App\Http\Controllers\GcRadio\GcRadioUsersController;
+use App\Http\Controllers\GcRadio\GcRadioCountriesController;
+use App\Http\Controllers\GcRadio\GcRadioMusicalGenresController;
 
 /*
 |--------------------------------------------------------------------------

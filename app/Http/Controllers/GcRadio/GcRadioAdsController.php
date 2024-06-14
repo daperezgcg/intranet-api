@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\GcRadio;
 
 use App\Http\Controllers\Controller;
-use App\Models\GcRadioAds;
+use App\Models\GcRadio\GcRadioAds;
 use App\Utilities\SharedFunctions;
 use Illuminate\Http\Request;
 

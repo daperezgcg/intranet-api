@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\GcRadio;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -28,5 +28,10 @@ class GcRadioMusicalGenres extends Model
     public function musicalPreferences(): BelongsToMany
     {
         return $this->belongsToMany(GcRadioUsers::class, 'gcradio_musical_preferences', 'id_musical_genre', 'uuid_user', 'id');
+    }
+
+    public function genreSongs(): BelongsToMany
+    {
+        return $this->belongsToMany(GcRadioSongs::class, 'gcradio_genre_songs', 'id_musical_genre', 'id_song', 'id');
     }
 }
