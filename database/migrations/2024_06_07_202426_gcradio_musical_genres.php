@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id('id');
             $table->string('name');
             $table->string('url_image');
-            $table->string('url_playlist');
         });
     }
 

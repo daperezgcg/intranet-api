@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\GcRadio\GcRadioAdsController;
 use App\Http\Controllers\GcRadio\GcRadioUsersController;
+use App\Http\Controllers\GcRadio\GcRadioSongsController;
 use App\Http\Controllers\GcRadio\GcRadioCountriesController;
 use App\Http\Controllers\GcRadio\GcRadioMusicalGenresController;
 
@@ -37,5 +38,9 @@ Route::prefix('gcradio')->group(function () {
     Route::controller(GcRadioAdsController::class)->group(function () {
         Route::get('getAds/{idCountry}', 'getAds');
         Route::post('registerAd', 'registerAd');
+    });
+
+    Route::controller(GcRadioSongsController::class)->group(function () {
+        Route::post('registerSong', 'registerSong');
     });
 });

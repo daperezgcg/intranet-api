@@ -43,14 +43,14 @@ class GcRadioMusicalGenresController extends Controller
         $sharedFunctions = new SharedFunctions();
         $sharedFunctions->uploadFile($directory, $image, $nameImage);
 
-        $genres = GcRadioMusicalGenres::create([
+        $genre = GcRadioMusicalGenres::create([
             'name' => $validatedData['name'],
             'url_image' => 'storage/' . $directory . $nameImage,
             'url_playlist' => $validatedData['url_playlist'],
         ]);
 
-        if ($genres) {
-            return response()->json($genres, 200);
+        if ($genre) {
+            return response()->json($genre, 200);
         }
         return response()->json('No se pudo registrar el genero musical', 400);
     }

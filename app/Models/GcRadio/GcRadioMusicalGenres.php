@@ -21,8 +21,7 @@ class GcRadioMusicalGenres extends Model
 
     protected $fillable = [
         'name',
-        'url_image',
-        'url_playlist'
+        'url_image'
     ];
 
     public function musicalPreferences(): BelongsToMany

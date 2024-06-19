@@ -13,9 +13,10 @@ class GcRadioUsersController extends Controller
      */
     public function getUser($uuid, Request $request)
     {
-        $user = GcRadioUsers::select('*')->with('musicalPreferences')->where('uuid', $uuid)->first();
+        $user = GcRadioUsers::select('*')->where('uuid', $uuid)->first();
 
         if ($user) {
+            $user->preferences = $user->musicalPreferences()->pluck('id');
             return response()->json($user, 200);
         }
 

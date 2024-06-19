@@ -4,6 +4,7 @@ namespace App\Models\GcRadio;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class GcRadioSongs extends Model
 {
@@ -19,9 +20,14 @@ class GcRadioSongs extends Model
     protected $updateTimestamps = false;
 
     protected $fillable = [
-        'tilte',
+        'title',
         'url',
         'duration',
         'artist'
     ];
+
+    public function genreSongs(): BelongsToMany
+    {
+        return $this->belongsToMany(GcRadioMusicalGenres::class, 'gcradio_genre_songs', 'id_song', 'id_musical_genre', 'id');
+    }
 }
