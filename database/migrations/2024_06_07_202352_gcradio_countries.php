@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('gcradio_countries', function (Blueprint $table) {
             $table->id('id');
             $table->string('name');
+            $table->string('code');
         });
     }
 

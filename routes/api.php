@@ -6,6 +6,7 @@ use App\Http\Controllers\GcRadio\GcRadioAdsController;
 use App\Http\Controllers\GcRadio\GcRadioUsersController;
 use App\Http\Controllers\GcRadio\GcRadioSongsController;
 use App\Http\Controllers\GcRadio\GcRadioCountriesController;
+use App\Http\Controllers\GcRadio\GcRadioEntitiesController;
 use App\Http\Controllers\GcRadio\GcRadioMusicalGenresController;
 
 /*
@@ -42,5 +43,9 @@ Route::prefix('gcradio')->group(function () {
 
     Route::controller(GcRadioSongsController::class)->group(function () {
         Route::post('registerSong', 'registerSong');
+    });
+
+    Route::controller(GcRadioEntitiesController::class)->group(function () {
+        Route::get('getEntitiesFilter', 'getEntitiesFilter');
     });
 });

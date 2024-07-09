@@ -16,5 +16,6 @@ class GcRadioCountries extends Model
     protected $table = 'gcradio_countries';
     protected $fillable = [
         'name',
+        'code',
     ];
 }
