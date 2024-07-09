@@ -16,8 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->unsignedBigInteger('id_country');
+            $table->unsignedBigInteger('id_entity')->nullable();
 
             $table->foreign('id_country')->references('id')->on('gcradio_countries')->onDelete('cascade');
+            $table->foreign('id_entity')->references('id')->on('gcradio_entities')->onDelete('cascade');
         });
     }
 

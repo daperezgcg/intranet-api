@@ -27,7 +27,8 @@ class GcRadioUsers extends Model
     protected $fillable = [
         'name',
         'email',
-        'id_country'
+        'id_country',
+        'id_entity',
     ];
 
     /**
@@ -49,4 +50,8 @@ class GcRadioUsers extends Model
     public function countries(): BelongsTo {
             return $this->belongsTo(GcRadioCountries::class, 'id_country', 'id');
     }
+
+    public function entities(): BelongsTo {
+        return $this->belongsTo(GcRadioEntities::class, 'id_entity', 'id');
+}
 }

@@ -4,20 +4,25 @@ namespace App\Http\Controllers\GcRadio;
 
 use App\Http\Controllers\Controller;
 use App\Models\GcRadio\GcRadioAds;
+use App\Models\GcRadio\GcRadioEntities;
+use App\Models\GcRadio\GcRadioUsers;
 use App\Utilities\SharedFunctions;
 use Illuminate\Http\Request;
 
 class GcRadioAdsController extends Controller
 {
-
     /**
      * Obtiene todos los anunciós relacionados al id del país.
      */
-    public function getAds($idCountry, Request $request)
+    public function getAds($uuid, Request $request)
     {
-        $ads = GcRadioAds::with('adsCountries')
-            ->whereHas('adsCountries', function ($query) use ($idCountry) {
-                $query->where('id_country', $idCountry);
+        $user = GcRadioUsers::select(['id_entity', 'id_country'])->where('uuid', $uuid)->first();
+
+        $ads = GcRadioAds::with('countries')->with('entities')
+            ->whereHas('countries', function ($query) use ($user) {
+                $query->where('id_model', $user->id_country);
+            })->orWhereHas('entities', function ($query) use ($user) {
+                $query->where('id_model', $user->id_entity);
             })->get();
 
         if ($ads) {
@@ -33,8 +38,10 @@ class GcRadioAdsController extends Controller
     public function registerAd(Request $request)
     {
         $validatedData = $request->validate([
-            'id_countries' => 'required|array|min:1',
-            'id_countries.*' => 'required|numeric',
+            'id_countries' => 'array|min:1',
+            'id_countries.*' => 'numeric',
+            'id_entities' => 'array|min:1',
+            'id_entities.*' => 'numeric',
             'title' => 'required|string',
             'text' => 'required|string',
             'image' => 'required|image',
@@ -59,7 +66,9 @@ class GcRadioAdsController extends Controller
             'url_audio' => $validatedData['url_audio'],
         ]);
 
-        $ads->adsCountries()->sync($validatedData['id_countries']);
+
+        $ads->countries()->sync($validatedData['id_countries']);
+        $ads->entities()->sync($validatedData['id_entities']);
 
         if ($ads) {
             return response()->json($ads, 200);

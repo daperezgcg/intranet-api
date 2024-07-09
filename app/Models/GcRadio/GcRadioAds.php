@@ -25,8 +25,13 @@ class GcRadioAds extends Model
     ];
 
 
-    public function adsCountries(): BelongsToMany
+    public function countries()
     {
-        return $this->belongsToMany(GcRadioCountries::class, 'gcradio_ads_countries', 'id_ad', 'id_country', 'id');
+        return $this->morphedByMany(GcRadioCountries::class, 'model', 'gcradio_model_has_ads', 'id_ad', 'id_model');
+    }
+
+    public function entities(): BelongsToMany
+    {
+        return $this->morphedByMany(GcRadioEntities::class, 'model', 'gcradio_model_has_ads', 'id_ad', 'id_model');
     }
 }

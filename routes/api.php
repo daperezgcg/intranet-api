@@ -37,7 +37,7 @@ Route::prefix('gcradio')->group(function () {
     });
 
     Route::controller(GcRadioAdsController::class)->group(function () {
-        Route::get('getAds/{idCountry}', 'getAds');
+        Route::get('getAds/{uuid}', 'getAds');
         Route::post('registerAd', 'registerAd');
     });
 

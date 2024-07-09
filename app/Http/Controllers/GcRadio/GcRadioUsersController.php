@@ -32,6 +32,7 @@ class GcRadioUsersController extends Controller
             'name' => 'required|string',
             'email' => 'required|email',
             'id_country' => 'required|string',
+            'id_entity' => 'nullable|numeric',
             'preferences' => 'required|array|min:1',
             'preferences.*' => 'required|numeric',
         ]);
@@ -40,6 +41,7 @@ class GcRadioUsersController extends Controller
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'id_country' => $validatedData['id_country'],
+            'id_entity' => $validatedData['id_entity'],
         ]);
 
         $user->musicalPreferences()->sync($validatedData['preferences']);

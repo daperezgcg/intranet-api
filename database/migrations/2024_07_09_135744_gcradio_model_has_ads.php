@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('gcradio_ads_countries', function (Blueprint $table) {
+        Schema::create('gcradio_model_has_ads', function (Blueprint $table) {
             $table->unsignedBigInteger('id_ad');
-            $table->unsignedBigInteger('id_country');
+            $table->unsignedBigInteger('id_model');
+            $table->string('model_type');
 
             $table->foreign('id_ad')->references('id')->on('gcradio_ads')->onDelete('cascade');
-            $table->foreign('id_country')->references('id')->on('gcradio_countries')->onDelete('cascade');
         });
     }
 
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('gcradio_ads_countries');
+        Schema::dropIfExists('gcradio_model_has_ads');
     }
 };

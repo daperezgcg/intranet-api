@@ -18,7 +18,7 @@ class GcRadioEntitiesController extends Controller
         $valueFilter = $request->input('valueFilter');
 
         if ($idCountry == 1 && $valueFilter) {
-            $entities = GcRadioEntities::where(function ($queryBuilder) use ($valueFilter) {
+            $entities = GcRadioEntities::select(['id', 'name'])->where(function ($queryBuilder) use ($valueFilter) {
                 $queryBuilder->where('name', 'LIKE', '%' . $valueFilter . '%');
             })->get();
         } else {
