@@ -1,0 +1,140 @@
+* {
+    margin: none;
+    padding: none;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Montserrat";
+    font-size: 9pt;
+}
+
+table {
+    width: 100%;
+    border: none;
+    text-align: left;
+}
+
+table th,
+table td {
+    border: none;
+    padding: 0pt;
+    padding-bottom: 4pt;
+    text-align: left;
+}
+
+.bar {
+    background-color: #003b71;
+    height: 5px;
+}
+
+.header-container {
+    /* border-bottom: 1px solid rgb(218, 218, 218); */
+    padding-bottom: 20px;
+}
+.container {
+    width: 100%;
+    width: 210mm;
+    padding: 10mm;
+    margin: 0 auto;
+}
+
+.table-header td {
+    width: 50%;
+    border: none;
+}
+
+.form-title {
+    font-size: 14pt;
+    font-weight: bold;
+    color: #003b71;
+}
+
+.mt-3 {
+    margin-top: 3mm;
+}
+
+.mt-5 {
+    margin-top: 5mm;
+}
+
+.mt-7 {
+    margin-top: 7mm;
+}
+
+.mt-10 {
+    margin-top: 6mm;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.divisor-container {
+    background-color: #003b71;
+    padding: 4px;
+    padding-left: 10pt;
+    border-radius: 5pt;
+    margin-top: 20pt;
+    border-radius: 10pt;
+}
+
+.divisor-container h1 {
+    font-size: 10pt;
+    color: #fff;
+}
+
+.table-content {
+    margin-top: 2.5mm;
+    padding-bottom: 2.5mm;
+    border-bottom: 1px solid rgb(218, 218, 218);
+}
+
+.table-content-shareholders {
+    margin-top: 5mm;
+    padding-bottom: 5mm;
+    border: 1px solid rgb(218, 218, 218);
+    font-size: 8pt;
+}
+
+.table-content-shareholders td {
+    padding: 8pt;
+    border: 1px solid rgb(218, 218, 218);
+}
+
+.table-content-shareholders th {
+    padding: 8pt;
+    border: 1px solid rgb(218, 218, 218);
+}
+
+.w-20 {
+    width: 20%;
+}
+
+.w-30 {
+    width: 30%;
+}
+
+.w-33 {
+    width: 33.33%;
+}
+
+.w-40 {
+    width: 40%;
+}
+
+.w-50 {
+    width: 50%;
+}
+
+.w-70 {
+    width: 70%;
+}
+
+.w-80 {
+    width: 80%;
+}
+
+.text {
+    font-size: 9pt;
+}

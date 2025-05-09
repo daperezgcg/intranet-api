@@ -11,20 +11,36 @@ class GcRadioUsersController extends Controller
     /**
      * Obtiene el usuario y sus preferencias musicales.
      */
-    public function getUser($uuid, Request $request)
+    // public function getUser($uuid, Request $request)
+    // {
+    //     $user = GcRadioUsers::select('*')->where('uuid', $uuid)->first();
+
+    //     if ($user) {
+    //         $user->preferences = $user->musicalPreferences()->pluck('id');
+    //         return response()->json($user, 200);
+    //     }
+
+    //     return response()->json('Usuario no encontrado', 400);
+    // }
+
+    public function getUser($identifier, Request $request)
     {
-        $user = GcRadioUsers::select('*')->where('uuid', $uuid)->first();
+    // Busca el usuario por UUID o por email
+    $user = GcRadioUsers::select('*')
+        ->where('uuid', $identifier)
+        ->orWhere('email', $identifier) // Suponiendo que el campo en la base de datos se llama 'email'
+        ->first();
 
-        if ($user) {
-            $user->preferences = $user->musicalPreferences()->pluck('id');
-            return response()->json($user, 200);
-        }
+    if ($user) {
+        $user->preferences = $user->musicalPreferences()->pluck('id');
+        return response()->json($user, 200);
+    }
 
-        return response()->json('Usuario no encontrado', 400);
+    return response()->json('Usuario no encontrado', 400);
     }
 
     /**
-     * Registra un nuevo usuario y le asigna los generos musicales que seleccionó.
+     * Registra un nuevo usuario y le asigna los géneros musicales que seleccionó.
      */
     public function registerUser(Request $request)
     {
@@ -33,8 +49,10 @@ class GcRadioUsersController extends Controller
             'email' => 'required|email',
             'id_country' => 'required|string',
             'id_entity' => 'nullable|numeric',
+            'cargo' => 'required|string',
             'preferences' => 'required|array|min:1',
             'preferences.*' => 'required|numeric',
+            'aceptance' => 'required|boolean',
         ]);
 
         $user = GcRadioUsers::create([
@@ -42,6 +60,8 @@ class GcRadioUsersController extends Controller
             'email' => $validatedData['email'],
             'id_country' => $validatedData['id_country'],
             'id_entity' => $validatedData['id_entity'],
+            'cargo' => $validatedData['cargo'],
+            'aceptance' => $validatedData['aceptance'],
         ]);
 
         $user->musicalPreferences()->sync($validatedData['preferences']);
@@ -53,7 +73,7 @@ class GcRadioUsersController extends Controller
     }
 
     /**
-     * Actualiza la información del usuario así como sus prefencias musicales.
+     * Actualiza la información del usuario así como sus preferencias musicales.
      */
     public function updateUser(Request $request)
     {
@@ -78,4 +98,22 @@ class GcRadioUsersController extends Controller
 
         return response()->json('No se pudo actualizar los datos', 400);
     }
+
+    /**
+     * Encuentra un usuario por correo electrónico y retorna su UUID y email.
+     */
+    public function findByEmail()
+    {
+
+        // $email = $request->input('email');
+        $email = 'dan@gmail.com';
+        $user = GcRadioUsers::findByEmail($email);
+
+        if ($user) {
+            return response()->json($user, 200);
+        } else {
+            return response()->json(['message' => 'Usuario no encontrado'], 404);
+        }
+    }
 }
+
